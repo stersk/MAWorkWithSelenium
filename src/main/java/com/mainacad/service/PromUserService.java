@@ -52,6 +52,41 @@ public class PromUserService {
   }
 
   public static WebDriver loginUser(User user, WebDriver webDriver) {
+    webDriver.get(BASE_URL);
+    TimerUtil.waitSeconds(3);
+
+    List<WebElement> inputElements = webDriver.findElements(By.cssSelector("a[data-qaid=auth_element]"));
+    if (inputElements.size() > 0) {
+      WebElement loginLink = inputElements.get(0);
+      loginLink.click();
+    }
+
+    TimerUtil.waitSeconds(3);
+
+    WebElement input = webDriver.findElement(By.id("phone_email"));
+    if (input != null) {
+      input.sendKeys(user.getEMail());
+    }
+
+    WebElement button = webDriver.findElement(By.id("phoneEmailConfirmButton"));
+    if (button != null) {
+      button.click();
+    }
+
+    TimerUtil.waitSeconds(3);
+
+    input = webDriver.findElement(By.id("enterPassword"));
+    if (input != null) {
+      input.sendKeys(user.getPassword());
+    }
+
+    button = webDriver.findElement(By.id("enterPasswordConfirmButton"));
+    if (button != null) {
+      button.click();
+    }
+
+    TimerUtil.waitSeconds(10);
+
     return webDriver;
   }
 }

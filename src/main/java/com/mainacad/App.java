@@ -16,7 +16,8 @@ public class App
         WebDriver driver = ChromeDriverUtil.getChromeDriver();
         User user = new User("testingUser", "testingPassword234", "test1234@mail.ua");
 
-        driver = PromUserService.registerUser(user, driver);
+        //driver = PromUserService.registerUser(user, driver);
+        driver = PromUserService.loginUser(user, driver);
         driver.quit();
     }
 }
